@@ -1,5 +1,4 @@
 import { getCurrentInstance, reactive, shallowRef, watchEffect } from 'vue'
-import { entries } from '@element-plus/utils/util'
 
 interface Params {
   excludeListeners?: boolean
@@ -19,7 +18,7 @@ export default (params: Params = {}) => {
   instance.attrs = reactive(instance.attrs)
 
   watchEffect(() => {
-    const res = entries(instance.attrs).reduce((acm, [key, val]) => {
+    const res = Object.entries(instance.attrs).reduce((acm, [key, val]) => {
       if (
         !allExcludeKeys.includes(key) &&
         !(excludeListeners && LISTENER_PREFIX.test(key))
